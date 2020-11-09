@@ -39,7 +39,9 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =cut
 
-sub function1 {
+sub new {
+  my $class = shift;
+  return bless {}, $class;
 }
 
 =head2 function2
