@@ -11,8 +11,8 @@ plan tests => 2;
 my $test_plan = <<'TEST_PLAN';
 
 PASS - Can create a formatter.
-WIP - Formatting empty text returns empty text.
-Formatting simple text returns identical text.
+PASS - Formatting empty text returns empty text.
+WIP - Null lookup returns original text.
 Single-entry lookup changes single word.
 Single-entry lookup changes all matching words.
 Multi-entry lookup changes all matching words.
@@ -28,6 +28,7 @@ RunAll();
 sub RunAll {
   CanCreateFormatter();
   EmptyTextReturnsEmptyText();
+  NullLookupReturnsOriginalText();
 }
 
 sub CanCreateFormatter {
@@ -46,3 +47,13 @@ sub EmptyTextReturnsEmptyText {
   is($result, $expected, (caller(0))[3]);
 }
 
+sub NullLookupReturnsOriginalText {
+  my %word_class = ();
+  my $formatter = Text::Format::Hungarian->new(\%word_class);
+  my $original_text = 'The quick brown fox...';
+
+  my $expected = $original_text;
+  my $result = $formatter->format($original_text);
+
+  is($result, $expected, (caller(0))[3]);
+}
