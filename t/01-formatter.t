@@ -6,7 +6,7 @@ use Test::More;
 
 use Text::Format::Hungarian;
 
-plan tests => 4;
+plan tests => 5;
 
 my $test_plan = <<'TEST_PLAN';
 
@@ -14,8 +14,8 @@ PASS - Can create a formatter.
 PASS - Formatting empty text returns empty text.
 Null lookup returns original text.
 PASS - Single-entry lookup changes single word.
-**WIP** Single-entry lookup changes all matching words.
-Multi-entry lookup changes all matching words.
+PASS - Single-entry lookup changes all matching words.
+** WIP ** Multi-entry lookup changes all matching words.
 Multi-entry lookup does not change partially matching words.
 Unmatched words are added to lookup.
 Lookup can be initialized from file.
@@ -37,12 +37,13 @@ sub RunAll {
   EmptyTextReturnsEmptyText();
   SingleEntryLookupChangesSingleWord();
   SingleEntryLookupChangesAllMatchingWords();
+  MultientrylookupChangesAllMatchingWords();
 }
 
 sub CanCreateFormatter {
   setup();
 
-  isa_ok($formatter, 'Text::Format::Hungarian', subroutine_name());
+  isa_ok($formatter, 'Text::Format::Hungarian', '$formatter');
 }
 
 
@@ -81,6 +82,25 @@ sub SingleEntryLookupChangesAllMatchingWords {
 }
 
 
+
+sub MultientrylookupChangesAllMatchingWords {
+  setup({quick => 'adj', brown => 'adj', 'fox' => 'noun'});
+
+  my $original_text = 'The quick quick brown fox is quick...';
+
+  my $result = $formatter->format($original_text);
+  my $expected = 'The adjQuick adjQuick brown fox is adjQuick...';
+
+  is($result, $expected, subroutine_name());
+
+  fail('Pick up here next time');
+}
+
+
+# ================================================================
+# Helpers
+
+
 sub subroutine_name {
   my $frames_back_from_my_caller = (shift || 0);
   my $frames_back_from_me = $frames_back_from_my_caller + 1;
@@ -88,3 +108,6 @@ sub subroutine_name {
   my $subroutine_name = $caller_info[3];
   return $subroutine_name;
 }
+
+
+  
