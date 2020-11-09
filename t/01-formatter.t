@@ -13,7 +13,7 @@ my $test_plan = <<'TEST_PLAN';
 PASS - Can create a formatter.
 PASS - Formatting empty text returns empty text.
 Null lookup returns original text.
-WIP - Single-entry lookup changes single word.
+PASS - Single-entry lookup changes single word.
 Single-entry lookup changes all matching words.
 Multi-entry lookup changes all matching words.
 Multi-entry lookup does not change partially matching words.
@@ -24,6 +24,12 @@ TEST_PLAN
 
 RunAll();
 
+my $formatter;
+sub setup {
+  my ($h_ref) = @_;
+  $formatter = Text::Format::Hungarian->new($h_ref);
+}
+
 
 sub RunAll {
   CanCreateFormatter();
@@ -32,13 +38,13 @@ sub RunAll {
 }
 
 sub CanCreateFormatter {
-  my $formatter = Text::Format::Hungarian->new();
+  setup();
 
   isa_ok($formatter, 'Text::Format::Hungarian', (caller(0))[3]);
 }
 
 sub EmptyTextReturnsEmptyText {
-  my $formatter = Text::Format::Hungarian->new();
+  setup();
   my $empty_text = '';
 
   my $expected = $empty_text;
@@ -48,8 +54,8 @@ sub EmptyTextReturnsEmptyText {
 }
 
 sub SingleEntryLookupChangesSingleWord {
-  my %word_class = (quick => 'adj');
-  my $formatter = Text::Format::Hungarian->new(\%word_class);
+  setup({quick => 'adj'});
+
   my $original_text = 'The quick brown fox...';
 
   my $expected = 'The adjQuick brown fox...';
