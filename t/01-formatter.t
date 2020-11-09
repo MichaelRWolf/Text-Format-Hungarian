@@ -6,12 +6,12 @@ use Test::More;
 
 use Text::Format::Hungarian;
 
-plan tests => 1;
+plan tests => 2;
 
 my $test_plan = <<'TEST_PLAN';
 
-** Can create a formatter.
-Formatting empty text returns empty text.
+PASS - Can create a formatter.
+WIP - Formatting empty text returns empty text.
 Formatting simple text returns identical text.
 Single-entry lookup changes single word.
 Single-entry lookup changes all matching words.
@@ -24,12 +24,24 @@ TEST_PLAN
 
 RunAll();
 
+
 sub RunAll {
   CanCreateFormatter();
+  EmptyTextReturnsEmptyText();
+}
+
+sub EmptyTextReturnsEmptyText {
+  my $formatter = Text::Format::Hungarian->new();
+  my $empty_text = '';
+
+  my $expected = $empty_text;
+  my $result = $formatter->format($empty_text);
+
+  is($result, $expected, (caller(0))[3]);
 }
 
 sub CanCreateFormatter {
   my $formatter = Text::Format::Hungarian->new();
 
-  isa_ok($formatter, 'Text::Format::Hungarian');
+  isa_ok($formatter, 'Text::Format::Hungarian', (caller(0))[3]);
 }

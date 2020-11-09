@@ -44,6 +44,10 @@ sub new {
   return bless {}, $class;
 }
 
+sub format {
+  return 'junk';
+}
+
 =head2 function2
 
 =cut
