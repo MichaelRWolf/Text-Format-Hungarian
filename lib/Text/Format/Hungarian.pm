@@ -45,7 +45,7 @@ sub new {
 }
 
 sub format {
-  return 'junk';
+  return '';
 }
 
 =head2 function2
