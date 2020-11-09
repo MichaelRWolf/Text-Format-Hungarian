@@ -15,8 +15,8 @@ PASS - Formatting empty text returns empty text.
 Null lookup returns original text.
 PASS - Single-entry lookup changes single word.
 PASS - Single-entry lookup changes all matching words.
-** WIP ** Multi-entry lookup changes all matching words.
-Multi-entry lookup does not change partially matching words.
+PASS - Multi-entry lookup changes all matching words.
+**WIP** Multi-entry lookup does not change partially matches.
 Unmatched words are added to lookup.
 Lookup can be initialized from file.
 Lookup can be serialized to file.
@@ -38,6 +38,7 @@ sub RunAll {
   SingleEntryLookupChangesSingleWord();
   SingleEntryLookupChangesAllMatchingWords();
   MultientrylookupChangesAllMatchingWords();
+  MultiEntryLookupDoesNotChangePartiallyMatches();
 }
 
 sub CanCreateFormatter {
@@ -92,6 +93,19 @@ sub MultientrylookupChangesAllMatchingWords {
   my $expected = 'The adjQuick adjQuick adjBrown nounFox is adjQuick...';
 
   is($result, $expected, subroutine_name());
+}
+
+
+sub MultiEntryLookupDoesNotChangePartiallyMatches{
+  setup({quick => 'adj', brown => 'adj', 'fox' => 'noun'});
+
+  my $original_text = 'The quick brown fox quickly browned foxfires';
+
+  my $result = $formatter->format($original_text);
+  my $expected = 'The adjQuick adjBrown nounFox quickly browned foxfires';
+
+  is($result, $expected, subroutine_name());
+
 }
 
 
