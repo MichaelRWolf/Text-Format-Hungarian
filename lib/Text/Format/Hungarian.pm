@@ -40,12 +40,15 @@ if you don't export anything, such as for a purely object-oriented module.
 =cut
 
 sub new {
-  my $class = shift;
-  return bless {}, $class;
+  my ($class, $lookup_ref) = @_;
+
+  return bless {_lookup_ref => $lookup_ref}, $class;
 }
 
 sub format {
-  return '';
+  my ($class, $text) = @_;
+
+  return $text;
 }
 
 =head2 function2
