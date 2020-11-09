@@ -42,28 +42,30 @@ sub RunAll {
 sub CanCreateFormatter {
   setup();
 
-  isa_ok($formatter, 'Text::Format::Hungarian', (caller(0))[3]);
+  isa_ok($formatter, 'Text::Format::Hungarian', subroutine_name());
 }
+
 
 sub EmptyTextReturnsEmptyText {
   setup();
   my $empty_text = '';
 
-  my $expected = $empty_text;
   my $result = $formatter->format($empty_text);
+  my $expected = $empty_text;
 
-  is($result, $expected, (caller(0))[3]);
+  is($result, $expected, subroutine_name());
 }
+
 
 sub SingleEntryLookupChangesSingleWord {
   setup({quick => 'adj'});
 
   my $original_text = 'The quick brown fox...';
 
-  my $expected = 'The adjQuick brown fox...';
   my $result = $formatter->format($original_text);
+  my $expected = 'The adjQuick brown fox...';
 
-  is($result, $expected, (caller(0))[3]);
+  is($result, $expected, subroutine_name());
 }
 
 
@@ -72,9 +74,17 @@ sub SingleEntryLookupChangesAllMatchingWords {
 
   my $original_text = 'The quick quick brown fox is quick...';
 
-  my $expected = 'The adjQuick adjQuick brown fox is adjQuick...';
   my $result = $formatter->format($original_text);
+  my $expected = 'The adjQuick adjQuick brown fox is adjQuick...';
 
-  is($result, $expected, (caller(0))[3]);
+  is($result, $expected, subroutine_name());
 }
 
+
+sub subroutine_name {
+  my $frames_back_from_my_caller = (shift || 0);
+  my $frames_back_from_me = $frames_back_from_my_caller + 1;
+  my @caller_info = caller($frames_back_from_me);
+  my $subroutine_name = $caller_info[3];
+  return $subroutine_name;
+}
