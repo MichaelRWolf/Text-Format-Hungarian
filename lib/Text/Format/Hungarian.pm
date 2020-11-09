@@ -46,12 +46,14 @@ sub new {
   return bless {_lookup_ref => $lookup_ref}, $class;
 }
 
+
 sub format {
   my ($self, $text) = @_;
   my $h_ref = $self->{_lookup_ref};
 
-  foreach (my ($word, $word_class) = each %$h_ref) {
-    $text =~ s/$word/join('', $word_class, ucfirst($word))/e;
+  # foreach (my ($word, $word_class) = each %$h_ref) {
+  while (my ($word, $word_class) = each $h_ref) {
+    $text =~ s/$word/join('', $word_class, ucfirst($word))/eg;
   }
 
   return $text;

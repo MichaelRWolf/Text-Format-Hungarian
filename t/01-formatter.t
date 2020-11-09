@@ -1,4 +1,4 @@
-#!perl -T
+#!perl
 use 5.006;
 use strict;
 use warnings;
@@ -27,6 +27,7 @@ RunAll();
 my $formatter;
 sub setup {
   my ($h_ref) = @_;
+  $h_ref ||= {};
   $formatter = Text::Format::Hungarian->new($h_ref);
 }
 
@@ -76,3 +77,4 @@ sub SingleEntryLookupChangesAllMatchingWords {
 
   is($result, $expected, (caller(0))[3]);
 }
+
