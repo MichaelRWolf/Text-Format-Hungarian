@@ -50,9 +50,9 @@ sub format {
   my ($self, $text) = @_;
   my $h_ref = $self->{_lookup_ref};
 
-  my ($word, $word_class) = ('quick', $h_ref->{quick} || '');
-
-  $text =~ s/$word/join('', $word_class, ucfirst($word))/e;
+  foreach (my ($word, $word_class) = each %$h_ref) {
+    $text =~ s/$word/join('', $word_class, ucfirst($word))/e;
+  }
 
   return $text;
 }
