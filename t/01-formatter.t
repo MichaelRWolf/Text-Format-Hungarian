@@ -89,11 +89,9 @@ sub MultientrylookupChangesAllMatchingWords {
   my $original_text = 'The quick quick brown fox is quick...';
 
   my $result = $formatter->format($original_text);
-  my $expected = 'The adjQuick adjQuick brown fox is adjQuick...';
+  my $expected = 'The adjQuick adjQuick adjBrown nounFox is adjQuick...';
 
   is($result, $expected, subroutine_name());
-
-  fail('Pick up here next time');
 }
 
 
