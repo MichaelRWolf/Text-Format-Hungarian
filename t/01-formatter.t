@@ -30,6 +30,12 @@ sub RunAll {
   EmptyTextReturnsEmptyText();
 }
 
+sub CanCreateFormatter {
+  my $formatter = Text::Format::Hungarian->new();
+
+  isa_ok($formatter, 'Text::Format::Hungarian', (caller(0))[3]);
+}
+
 sub EmptyTextReturnsEmptyText {
   my $formatter = Text::Format::Hungarian->new();
   my $empty_text = '';
@@ -40,8 +46,3 @@ sub EmptyTextReturnsEmptyText {
   is($result, $expected, (caller(0))[3]);
 }
 
-sub CanCreateFormatter {
-  my $formatter = Text::Format::Hungarian->new();
-
-  isa_ok($formatter, 'Text::Format::Hungarian', (caller(0))[3]);
-}
