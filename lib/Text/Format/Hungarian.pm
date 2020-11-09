@@ -41,12 +41,18 @@ if you don't export anything, such as for a purely object-oriented module.
 
 sub new {
   my ($class, $lookup_ref) = @_;
+  $lookup_ref ||= {};
 
   return bless {_lookup_ref => $lookup_ref}, $class;
 }
 
 sub format {
-  my ($class, $text) = @_;
+  my ($self, $text) = @_;
+  my $h_ref = $self->{_lookup_ref};
+
+  my ($word, $word_class) = ('quick', $h_ref->{quick} || '');
+
+  $text =~ s/$word/join('', $word_class, ucfirst($word))/e;
 
   return $text;
 }
