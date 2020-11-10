@@ -6,17 +6,17 @@ use Test::More;
 
 use Text::Format::Hungarian;
 
-plan tests => 5;
+plan tests => 6;
 
 my $test_plan = <<'TEST_PLAN';
 
-PASS - Can create a formatter.
-PASS - Formatting empty text returns empty text.
+PASS 1 - Can create a formatter.
+PASS 2 - Formatting empty text returns empty text.
 Null lookup returns original text.
-PASS - Single-entry lookup changes single word.
-PASS - Single-entry lookup changes all matching words.
-PASS - Multi-entry lookup changes all matching words.
-**WIP** Multi-entry lookup does not change partially matches.
+PASS 3 - Single-entry lookup changes single word.
+PASS 4 - Single-entry lookup changes all matching words.
+PASS 5 - Multi-entry lookup changes all matching words.
+PASS 6 -  Multi-entry lookup does not change partially matches.
 Unmatched words are added to lookup.
 Lookup can be initialized from file.
 Lookup can be serialized to file.
@@ -97,15 +97,18 @@ sub MultientrylookupChangesAllMatchingWords {
 
 
 sub MultiEntryLookupDoesNotChangePartiallyMatches{
-  setup({quick => 'adj', brown => 'adj', 'fox' => 'noun'});
+  setup({quick	  => 'adj', 	# but not 'quickly'
+	 quickly  => 'adv',
+	 brown	  => 'adj', 	# but not 'browned'
+	 fox	  => 'n'	# but not 'foxfires' or 'outfoxed'
+	});
 
-  my $original_text = 'The quick brown fox quickly browned foxfires';
+  my $original_text = 'The quick brown fox quickly outfoxed browned foxfires';
 
   my $result = $formatter->format($original_text);
-  my $expected = 'The adjQuick adjBrown nounFox quickly browned foxfires';
+  my $expected = 'The adjQuick adjBrown nFox advQuickly outfoxed browned foxfires';
 
   is($result, $expected, subroutine_name());
-
 }
 
 

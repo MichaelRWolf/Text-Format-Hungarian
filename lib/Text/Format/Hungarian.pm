@@ -51,9 +51,10 @@ sub format {
   my ($self, $text) = @_;
   my $h_ref = $self->{_lookup_ref};
 
-  # foreach (my ($word, $word_class) = each %$h_ref) {
+
   while (my ($word, $word_class) = each $h_ref) {
-    $text =~ s/$word/join('', $word_class, ucfirst($word))/eg;
+    $text =~ s{\b $word \b}
+	      {join('', $word_class, ucfirst($word))}egx;
   }
 
   return $text;
