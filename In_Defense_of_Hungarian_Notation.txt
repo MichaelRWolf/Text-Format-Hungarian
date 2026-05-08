@@ -1,0 +1,62 @@
+* Body of Article
+
+Once upon a time, when a byte was so massive that we consumed memory by the nibbles and bits, and before assemblers grew up to be compilers...
+
+
+computer programmers relationship with code, memory, and XXX was much more intimate.  And because of that, assemblers had much fewer restrictions on how memory was used, so programmers were able to take liberties that would be unimaginable today, and they developed an inside joke (specific language or habit or convention) of decorating variable names to indicate how they were to be used.
+
+
+Microsoft Word (original release 1983).
+
+MSFT documentation ()
+
+* Background Research
+
+** Hungarian Notation
+
+[[https://en.wikipedia.org/wiki/Hungarian_notation][Wikipedia...]]
+
+VariableName ::== type_or_purpose_mnenonic given_name
+
+
+#-BEGIN_QUOTE  
+Because BCPL has no data types other than the machine word, nothing in the language itself helps a programmer remember variables' types.
+#-END_QUOTE 
+
+
+** Microsoft Word
+
+Microsoft Research License Agreement | Microsoft Word for Windows version 1.1a - CHM. (2019). Retrieved January 2, 2021, from CHM website: https://computerhistory.org/blogs/microsoft-research-license-agreement-msword-v-1-1a/
+
+‌Wikipedia Contributors. (2020, December 20). History of Microsoft Word. Retrieved January 2, 2021, from Wikipedia website: https://en.wikipedia.org/wiki/History_of_Microsoft_Word
+
+Word ‌Version 1.1 -- 1984
+
+** C++ Programming Language
+
+C++ first appeared 1985
+
+Wikipedia Contributors. (2020, December 27). C++. Retrieved January 2, 2021, from Wikipedia website: https://en.wikipedia.org/wiki/C%2B%2B
+
+‌
+** C Programming Language
+
+C First appeared 1972
+
+Wikipedia Contributors. (2021, January 1). C (programming language). Retrieved January 2, 2021, from Wikipedia website: https://en.wikipedia.org/wiki/C_(programming_language)
+
+‌
+** BCPL Programming Language
+‌BCPL first appeared 1967
+
+> Simonyi: ...BCPL [had] a single type which was a 16-bit word... not that it matters.
+
+a stripped down and syntactically changed version of BCPL, called B, was the language on which the C programming language was based. 
+
+Wikipedia Contributors. (2020, December 14). BCPL. Retrieved January 2, 2021, from Wikipedia website: https://en.wikipedia.org/wiki/BCPL
+
+
+** B Programming Language
+B first appeared 1969
+
+typeless language
